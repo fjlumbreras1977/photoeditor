@@ -1,0 +1,41 @@
+VIVA PHOTO EDITOR — Instalación en hosting
+
+1. Descomprime este ZIP en tu ordenador.
+2. Sube index.html, app.js, workspace.js, style.css y viva-logo.jpg a la misma carpeta de tu hosting (por ejemplo: public_html/photo-editor/).
+3. Abre https://tudominio.com/photo-editor/ en un navegador actualizado.
+
+No requiere PHP, base de datos, Node.js, instalación de paquetes ni claves API. Funciona como una web estática. Utiliza HTTPS para la publicación.
+
+Los archivos deben conservar sus nombres y estar juntos. También se incluye el logotipo como favicon.
+
+USO
+Abre una imagen o arrástrala al lienzo. Guarda el proyecto como .viva para conservar las capas y ajustes. Exporta como PNG, JPEG o WebP. Los proyectos .luma de la primera versión también se pueden abrir.
+
+Las fotos se procesan en el navegador y no se suben a un servidor. Guarda antes de cerrar la pestaña. El trabajo no se guarda automáticamente.
+
+ALCANCE DE ESTA VERSIÓN
+Motor raster sRGB de 8 bits; máximo 40 megapíxeles por imagen. Historial de 18 pasos en memoria. Texto y formas rasterizados. No admite PSD, RAW ni CMYK. El rendimiento depende de la memoria del dispositivo, el tamaño de las imágenes y el número de capas. GIF se importa como imagen fija.
+
+Comprobación: sintaxis JavaScript y referencias locales verificadas. La revisión visual en navegador queda pendiente.
+
+VERSIÓN 1.1 — ESPACIO DE TRABAJO CLÁSICO
+Menús Archivo, Edición, Imagen, Capa, Selección, Filtro, Vista y Ayuda. Barra de herramientas compacta con iconos vectoriales. Colores frontal/fondo. Atajos compatibles para las operaciones implementadas.
+
+ATAJOS PRINCIPALES
+V mover; M selección; C recortar; B pincel; E borrar; S clonar; R desenfoque; T texto; U rectángulo; Mayús+U cambia entre rectángulo y elipse; G degradado; I cuentagotas; H mano; Z zoom (Alt+clic aleja).
+Espacio: mano temporal. D: negro/blanco. X: intercambiar colores. [ y ]: tamaño de pincel. 1 a 9: opacidad; 0: 100%.
+Ctrl+N nuevo; Ctrl+O abrir; Ctrl+S guardar; Ctrl+Mayús+S guardar como. Ctrl+Alt+Mayús+W exportar.
+Ctrl+Z deshacer; Ctrl+Mayús+Z rehacer.
+Ctrl+A seleccionar todo; Ctrl+D deseleccionar; Ctrl+Mayús+D volver a seleccionar; Ctrl+Mayús+I invertir selección.
+Ctrl+C / X / V copiar / cortar / pegar (portapapeles interno).
+Ctrl+J capa vía copiar; Ctrl+Mayús+J capa vía cortar. Ctrl+Mayús+N nueva capa.
+Ctrl+T abre transformación numérica de capa. Ctrl+Alt+I tamaño de imagen. Ctrl+I invertir colores.
+Ctrl+E combinar hacia abajo; Ctrl+Mayús+E combinar visibles. Ctrl+[ y Ctrl+] reordenar capas.
+Alt+Retroceso: rellenar frontal; Ctrl+Retroceso: rellenar fondo.
+Flechas: mover capa 1 px; Mayús+flechas: 10 px.
+Ctrl+0 encajar; Ctrl+1 100%; Ctrl+2 200%; Ctrl++ / Ctrl+- zoom. Tab: ocultar paneles.
+Ctrl+Alt+Mayús+K abre la lista de atajos.
+
+En Mac usa Cmd en lugar de Ctrl y Option en lugar de Alt. Algunos atajos están reservados por el navegador y no se pueden interceptar de forma fiable. Las mismas operaciones están disponibles en los menús.
+
+Este editor no implementa todas las funciones ni todos los atajos de Photoshop. Se mantienen las limitaciones del motor descritas arriba.
