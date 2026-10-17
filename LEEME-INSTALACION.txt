@@ -637,3 +637,11 @@ MANUAL DE USUARIO (2.6)
 Ayuda > Manual de usuario abre la guía completa en una pestaña independiente.
 Ayuda también permite descargar el PDF e imprimir el manual, sin imprimir la foto.
 Los archivos manual.html y manual-viva-photo-editor.pdf deben subirse junto al editor.
+
+PINCELES AMPLIADOS (2.7)
+Selecciona B (pincel) o E (borrador) y pulsa el nombre de la punta en la barra superior.
+16 puntas incluidas: duro, suave, cuadrado, plano, caligráfico, rotulador, tiza, carbón, seco, cerdas, aerógrafo, pulverizador, salpicaduras, estrellas, hojas y hierba.
+Vista previa del trazo, dureza para puntas redondas, flujo, espaciado, ángulo, redondez, dispersión y variaciones de tamaño/ángulo. Presión del lápiz opcional en dispositivos compatibles.
+Se conservan los controles de tamaño/opacidad y los atajos [ y ]. Guarda hasta 20 configuraciones en este navegador.
+Las puntas creadas mediante Edición > Definir pincel siguen disponibles en Mis pinceles mientras estén activadas; su gestión sigue en Edición > Preajustes personalizados.
+El aerógrafo deposita pintura al mover o pulsar; no tiene acumulación temporizada en reposo. No importa archivos ABR.
