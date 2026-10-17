@@ -1,41 +1,639 @@
-VIVA PHOTO EDITOR — Instalación en hosting
+VIVA PHOTO EDITOR — AJUSTES DE IMAGEN Y NIVELES (2.6)
+Imagen > Ajustes reúne Niveles (Ctrl+L), Brillo/contraste, Exposición,
+Intensidad, Tono/saturación (Ctrl+U), Equilibrio de color, Blanco y negro,
+Filtro de fotografía, Invertir, Posterizar y Umbral.
 
-1. Descomprime este ZIP en tu ordenador.
-2. Sube index.html, app.js, workspace.js, style.css y viva-logo.jpg a la misma carpeta de tu hosting (por ejemplo: public_html/photo-editor/).
-3. Abre https://tudominio.com/photo-editor/ en un navegador actualizado.
+Niveles: histograma RGB/R/G/B de 256 valores, ponderado por transparencia y
+selección; negro, gamma y blanco de entrada y dos valores de salida. Controles
+numéricos y triángulos arrastrables, por canal. Gamma de 0,10 a 9,99. Auto
+estira los extremos con un recorte del 0,1 %. Cuentagotas de negro, gris y
+blanco sobre la muestra. Restablecer y previsualización en el documento.
+La corrección RGB maestra se aplica antes de las correcciones individuales.
 
-No requiere PHP, base de datos, Node.js, instalación de paquetes ni claves API. Funciona como una web estática. Utiliza HTTPS para la publicación.
+Se puede aplicar como ajuste editable de la capa actual o crear una capa de
+ajuste que afecta a las inferiores. El texto y las figuras conservan sus
+propiedades. La selección se conserva como máscara. Cancelar/Esc descarta
+el borrador; Aceptar crea un paso de deshacer. El proyecto .viva conserva los
+ajustes. Para editarlos, vuelve a elegir su tipo en Imagen > Ajustes; el botón
+◐ de la fila de capas abre el último ajuste. Capa > Nueva capa de ajuste >
+Niveles crea directamente una capa de Niveles.
 
-Los archivos deben conservar sus nombres y estar juntos. También se incluye el logotipo como favicon.
+El motor procesa RGB de 8 bits, también en documentos CMYK genéricos. Son
+implementaciones propias; los ajustes generales no reproducen todos los
+controles o algoritmos de Adobe. No incluye Curvas ni gestión ICC de imprenta.
+Los ajustes sobre capas de píxeles se reflejan en la apariencia exportada;
+no se exportan como ajustes nativos de Photoshop. En PSD, las capas de ajuste
+pueden diferir, y actualizar texto/vector en Photoshop puede cambiar su aspecto.
+Conserva el proyecto .viva o exporta una imagen acoplada para fijar la apariencia.
 
-USO
-Abre una imagen o arrástrala al lienzo. Guarda el proyecto como .viva para conservar las capas y ajustes. Exporta como PNG, JPEG o WebP. Los proyectos .luma de la primera versión también se pueden abrir.
+VIVA PHOTO EDITOR — OPCIONES DE SELECCIÓN (2.5)
+Barra contextual para marco rectangular/elíptico, lazo, lazo poligonal y
+varita: Nueva, Añadir, Restar e Intersectar. Shift antes de iniciar añade;
+Alt resta; Shift+Alt intersecta. Las teclas son temporales y no cambian el
+botón elegido. Se combinan máscaras con cobertura de 0 a 255.
+Varita: Contiguo activado limita la selección a la región conectada;
+desactivado incluye regiones del mismo color en toda la capa. Tolerancia,
+suavizado, muestra de la capa activa o todas las visibles y promedio de
+punto, 3×3, 5×5 u 11×11. Desvanecimiento de hasta 250 px.
+Marcos: Normal, Proporción fija o Tamaño fijo. Shift pulsado después de
+iniciar restringe proporción; Alt después de iniciar dibuja desde el centro.
+Espacio durante el arrastre desplaza el marco. El grupo M incorpora marco
+de fila única y columna única. Lazo poligonal: Enter/doble clic/cerrar sobre
+el primer punto termina; Retroceso borra el último punto; Esc cancela.
+Selección > Modificar selección: desvanecer, expandir, contraer, borde y
+suavizar contorno. Radios de 1 a 100 px. Las operaciones pueden deshacerse.
+Estos controles cubren selección geométrica y por color; no incorporan
+selección de sujetos/objetos mediante IA, lazo magnético ni el motor de
+selección de cabello de Adobe. El suavizado/desvanecimiento es propio.
 
-Las fotos se procesan en el navegador y no se suben a un servidor. Guarda antes de cerrar la pestaña. El trabajo no se guarda automáticamente.
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 2.4.2
+El lienzo inicial se encaja cuando termina de montarse toda la interfaz y
+antes de retirar la portada. Encajar calcula el espacio útil real, descontando
+el relleno del área de trabajo y un margen de seguridad, y centra la vista.
+Se mantiene también al crear documentos. No modifica las medidas ni los
+píxeles de la imagen. El zoom admite hasta 0,1 % para lienzos muy grandes.
 
-ALCANCE DE ESTA VERSIÓN
-Motor raster sRGB de 8 bits; máximo 40 megapíxeles por imagen. Historial de 18 pasos en memoria. Texto y formas rasterizados. No admite PSD, RAW ni CMYK. El rendimiento depende de la memoria del dispositivo, el tamaño de las imágenes y el número de capas. GIF se importa como imagen fija.
+VIVA PHOTO EDITOR — VISIBILIDAD DE CAPAS (2.4)
+Columna fija a la izquierda de cada fila, con zona de clic de 32 píxeles
+que ocupa toda la altura de la capa y un separador vertical. Ojo blanco de
+22 píxeles para capas visibles, casilla vacía para capas ocultas. Las capas
+dentro de grupos mantienen el ojo alineado con el resto de la columna.
+El ojo se atenúa si un grupo superior oculta la capa. Etiquetas accesibles
+con el nombre y estado de la capa. Clic para mostrar/ocultar, con deshacer.
 
-Comprobación: sintaxis JavaScript y referencias locales verificadas. La revisión visual en navegador queda pendiente.
+VIVA PHOTO EDITOR — ARRASTRAR CAPAS (2.4)
+F7: al arrastrar una capa, el origen se atenúa y aparece una imagen de
+arrastre con su nombre. Una línea azul indica si se soltará encima o debajo.
+La zona central de un grupo se resalta para indicar que la capa entrará en
+él. Mensaje con el destino y desplazamiento de la lista cerca de sus bordes.
+Al soltar se actualiza el orden y se registra un paso de deshacer. Se impide
+mover una capa bloqueada, introducir grupos dentro de sus descendientes y
+mover contenido a grupos bloqueados. Arrastrar mueve una capa o un grupo
+completo cada vez; no mueve conjuntamente varias capas seleccionadas.
 
-VERSIÓN 1.1 — ESPACIO DE TRABAJO CLÁSICO
-Menús Archivo, Edición, Imagen, Capa, Selección, Filtro, Vista y Ayuda. Barra de herramientas compacta con iconos vectoriales. Colores frontal/fondo. Atajos compatibles para las operaciones implementadas.
+VIVA PHOTO EDITOR — NUBES DE DIFERENCIA (2.4)
+Filtro > Renderizar > Nubes de diferencia se aplica directamente a la capa
+rasterizada. Genera ruido de gradiente fractal con siete octavas, usa los
+colores frontal y de fondo y mezcla con los píxeles mediante Diferencia.
+Cada aplicación genera una semilla nueva. Repetir desde Último filtro o
+Ctrl+Alt+F produce nuevos patrones y permite construir vetas tipo mármol.
+Se respeta la selección, sus niveles de cobertura y el bloqueo alfa.
+Nubes utiliza ahora el mismo generador de ruido, sin mezclar en Diferencia.
+En la Galería se pueden controlar escala y semilla y combinar ambas nubes
+con otros efectos. Allí la semilla se mantiene para que vista previa y
+aplicación correspondan a la misma realización.
+El generador es propio: reproduce este comportamiento, no los píxeles exactos
+del algoritmo propietario de Adobe. Las vistas reducidas pueden perder detalle.
 
-ATAJOS PRINCIPALES
-V mover; M selección; C recortar; B pincel; E borrar; S clonar; R desenfoque; T texto; U rectángulo; Mayús+U cambia entre rectángulo y elipse; G degradado; I cuentagotas; H mano; Z zoom (Alt+clic aleja).
-Espacio: mano temporal. D: negro/blanco. X: intercambiar colores. [ y ]: tamaño de pincel. 1 a 9: opacidad; 0: 100%.
-Ctrl+N nuevo; Ctrl+O abrir; Ctrl+S guardar; Ctrl+Mayús+S guardar como. Ctrl+Alt+Mayús+W exportar.
-Ctrl+Z deshacer; Ctrl+Mayús+Z rehacer.
-Ctrl+A seleccionar todo; Ctrl+D deseleccionar; Ctrl+Mayús+D volver a seleccionar; Ctrl+Mayús+I invertir selección.
-Ctrl+C / X / V copiar / cortar / pegar (portapapeles interno).
-Ctrl+J capa vía copiar; Ctrl+Mayús+J capa vía cortar. Ctrl+Mayús+N nueva capa.
-Ctrl+T abre transformación numérica de capa. Ctrl+Alt+I tamaño de imagen. Ctrl+I invertir colores.
-Ctrl+E combinar hacia abajo; Ctrl+Mayús+E combinar visibles. Ctrl+[ y Ctrl+] reordenar capas.
-Alt+Retroceso: rellenar frontal; Ctrl+Retroceso: rellenar fondo.
-Flechas: mover capa 1 px; Mayús+flechas: 10 px.
-Ctrl+0 encajar; Ctrl+1 100%; Ctrl+2 200%; Ctrl++ / Ctrl+- zoom. Tab: ocultar paneles.
-Ctrl+Alt+Mayús+K abre la lista de atajos.
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 2.3.2
+Pantalla de entrada con la imagen suministrada, centrada sobre negro,
+a sus dimensiones originales de 749 × 422 píxeles. No se escala ni deforma.
+En pantallas más pequeñas se permite desplazar la portada, conservando
+el tamaño. Se muestra durante 4 segundos desde que la imagen se ha cargado
+y pintado; después aparece la pantalla de nuevo documento. La aplicación
+se prepara en segundo plano. Si tarda más de 4 segundos en cargar sus
+archivos, la portada permanece hasta que está lista. No se muestra al crear
+cada documento: aparece al abrir o recargar la página.
 
-En Mac usa Cmd en lugar de Ctrl y Option en lugar de Alt. Algunos atajos están reservados por el navegador y no se pueden interceptar de forma fiable. Las mismas operaciones están disponibles en los menús.
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 2.3.1
+Recortar se encuentra en Imagen > Recortar… y deja de ocupar un botón en
+la barra vertical. Conserva el atajo C. Activa la herramienta y arrastra
+sobre el lienzo para definir el área que quieres conservar.
 
-Este editor no implementa todas las funciones ni todos los atajos de Photoshop. Se mantienen las limitaciones del motor descritas arriba.
+VIVA PHOTO EDITOR — GALERÍA DE FILTROS (2.3)
+
+Filtro > Galería de filtros abre una ventana amplia con vista previa a la
+izquierda, miniaturas en carpetas desplegables en el centro y controles y
+pila de efectos a la derecha. Conserva los filtros y categorías de VIVA;
+la organización visual sigue la galería de Photoshop, pero no añade los
+filtros artísticos propietarios que VIVA no implementa.
+
+Miniaturas calculadas con la capa actual; búsqueda de filtros, selección
+por miniatura o desplegable. Ajustes con deslizadores y valores numéricos.
+Nueva capa de efecto duplica el actual para combinarlo con otro filtro.
+Ojo para activar/desactivar, eliminar, flechas o arrastrar para reordenar.
+Hasta 10 efectos por pila, aplicados desde abajo hacia arriba.
+Vista previa con zoom, encajar, desplazamiento con la mano y original.
+Se puede ocultar la columna de miniaturas para ampliar la vista.
+
+Cancelar o Esc no modifica la imagen. Aceptar calcula la pila sobre los
+píxeles originales y crea un único paso de deshacer. Respeta la selección
+y sus niveles de transparencia y el bloqueo alfa. Último filtro repite la
+pila aceptada. Se aplica a capas rasterizadas; no crea filtros inteligentes.
+Vista previa reducida a un máximo de 900 × 650 píxeles para mantener la
+respuesta; el porcentaje de reducción se indica. Aceptar usa resolución
+completa. La selección también se refleja en la vista previa.
+
+Verificación automatizada: orden secuencial, efectos ocultos, cancelación,
+añadir/eliminar/reordenar y aplicación con un solo paso de historial.
+Verificación visual en navegador pendiente.
+
+VIVA PHOTO EDITOR — ESTILOS DE CAPA (2.2)
+
+Ventana unificada: lista de efectos con casillas a la izquierda, ajustes del
+efecto seleccionado en el centro y Aceptar, Cancelar, Previsualizar y Nuevo
+estilo a la derecha. Abrir desde fx, Capa > Estilo de capa, opciones de fusión,
+menú contextual o doble clic en el espacio vacío de la fila de una capa.
+Seleccionar un nombre muestra sus ajustes; la casilla activa/desactiva el
+efecto. Los valores desactivados se conservan para volver a activarlos.
+Vista previa sobre el documento y una muestra. Los cambios son un borrador:
+Cancelar y Esc conservan el original; Aceptar registra un solo paso de deshacer.
+Opciones de fusión, opacidad y relleno integradas en la misma ventana.
+Sombras: ángulo y distancia. Ajustes con deslizadores y campos numéricos,
+colores y motivos según el efecto. Restablecer efecto recupera sus valores
+iniciales. Nuevo estilo guarda los efectos activos en este navegador.
+F7 muestra los efectos activos bajo cada capa; se pueden plegar, desactivar
+con su botón y abrir directamente. Se conservan los motores de efectos de
+VIVA: esta reorganización no reproduce todos los controles ni el motor de
+renderizado de Photoshop. Sigue existiendo una sola instancia de cada efecto.
+
+Verificación automatizada: borrador sin modificar la capa, cancelar, aceptar
+con un checkpoint, desactivar/reactivar conservando ajustes y rutas de acceso.
+Revisión visual en navegador pendiente.
+
+VIVA PHOTO EDITOR — SELECCIONES GUARDADAS (2.1)
+
+Selección > Cargar selección: documento abierto del mismo tamaño, canal,
+inversión y operaciones Nueva, Añadir, Restar e Intersectar. Fuentes: canales
+alfa guardados, transparencia de capas, máscaras de capa y canales RGB/CMYK
+o gris según el modo del documento. Las selecciones se alinean por el origen
+del lienzo; documentos de dimensiones diferentes no aparecen como origen.
+Selección > Guardar selección: nuevo canal alfa con nombre o modificación
+de uno existente con las cuatro operaciones; hasta 20 canales por documento.
+Se pueden guardar en otro documento abierto del mismo tamaño. Deshacer y
+Rehacer conservan los canales. Los proyectos .viva guardan estos canales y
+la selección activa. El PSD actual no conserva canales alfa adicionales.
+
+Los niveles parciales de selección se conservan al cargar/guardar, combinar,
+copiar/cortar, pintar, borrar, rellenar, aplicar filtros y crear máscaras de
+capa desde la selección. Contornos de selección mostrados sobre los píxeles
+con cobertura positiva; no son una reproducción del contorno al 50 % de
+Photoshop. Las operaciones de trazado y otras herramientas que trabajan con
+Path2D usan contornos binarios. No se promete equivalencia completa con
+todas las herramientas de Photoshop.
+
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 2.1
+
+MODOS DE COLOR
+Nuevo documento e Imagen > Modo de color: RGB sRGB, CMYK genérico,
+escala de grises y blanco/negro por umbral. Se conservan las capas originales,
+texto y figuras editables. Los modos se aplican a la composición, se guardan
+con el proyecto y se mantienen por pestaña; Deshacer recupera el modo anterior.
+Procesamiento interno Canvas RGB, 8 bits por canal. No ofrece edición nativa
+por píxel de cuatro canales CMYK independientes, ni 16/32 bits, Lab de trabajo,
+perfiles ICC personalizados, prueba de imprenta certificada o tintas planas.
+
+CMYK: separación matemática con generación máxima de negro y límite de
+cobertura total configurable de 100 a 400 %. Pantalla y mezcla de capas RGB.
+El selector Color frontal RGB / CMYK permite introducir porcentajes C/M/Y/K.
+Imagen > Canales y separaciones muestra los canales calculados de salida.
+La conversión es genérica, sin caracterización de papel, tintas o máquina.
+Para producción profesional hay que convertir al perfil ICC requerido por
+la imprenta mediante una herramienta con gestión ICC antes de entregar.
+
+TIFF: Archivo > Exportar TIFF CMYK / grises / 1 bit permite cuatro canales
+CMYK reales de 8 bits, grises de 8 bits, B/N empaquetado de 1 bit o RGB+alfa.
+Exportar como > TIFF usa el modo del documento. CMYK, grises y B/N se acoplan
+sobre blanco. TIFF sin compresión y con resolución ppp. PNG/JPEG/WebP/AVIF,
+impresión del navegador y PSD siguen siendo salida RGB; no se etiquetan
+falsamente como CMYK. Apertura de PSD CMYK todavía no admitida.
+
+Verificación: conversión RGB/CMYK, límite de tinta, alfa en grises,
+persistencia de modo por documento y TIFF decodificado independientemente
+con Pillow: CMYK, L y 1 bit con resolución 300 ppp. Verificación visual en
+navegador y con imprenta pendiente.
+
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 2.0.1
+
+TEXTO COMPLETO FUERA DEL LIENZO
+Las capas de texto amplían su superficie al escribir y conservan el contenido
+que sale del documento. Ese contenido permanece oculto fuera del lienzo,
+también durante la edición, sin eliminarse. Al mover la capa hacia dentro
+del documento, el texto vuelve a mostrarse completo.
+El tamaño del documento no cambia y la exportación/impresión incluyen solo
+la parte que queda dentro del lienzo. Se admiten capas de hasta 12000 px por
+eje y 40 megapíxeles; el texto editable sigue conservado como datos.
+
+TIPOGRAFÍA PROFESIONAL
+Botón «Tipografía…» en la barra de Texto y Capa > Text > Composición
+profesional. Ofrece interlineado fijo en píxeles o automático, interletrado,
+alineación izquierda/centro/derecha/justificada, dirección LTR/RTL, orientación
+horizontal/vertical, sangría de primera línea, espacio antes/después del
+párrafo, kerning del navegador y versalitas. El texto de párrafo tiene ancho
+configurable y justifica las líneas salvo la última de cada párrafo.
+La composición se basa en el motor de fuentes de Canvas: no incluye
+separación silábica automática, estilos por caracteres, pares de kerning
+manuales ni composición editorial avanzada. El espaciado entre párrafos en
+vertical y la edición DOM pueden diferir ligeramente de la salida raster.
+
+CAPAS EDITABLES Y SUS ICONOS
+Texto y figuras se mantienen editables al escalar, girar, sesgar y voltear.
+En la ventana F7 se distinguen con una T o con su icono de figura. Las figuras
+seleccionadas muestran controles de color y acceso al escalado; los trazados
+abiertos tienen grosor editable. Las operaciones exclusivamente de píxeles
+solicitan Capa > Rasterizar en vez de convertir silenciosamente el contenido.
+Las deformaciones no lineales siguen siendo operaciones de píxeles y por
+ello requieren rasterizar primero. Los menús de perfiles y aplicación de
+máscara también evitan rasterizaciones implícitas.
+El botón derecho en el lienzo selecciona la capa visible superior cuyo píxel
+no es transparente; ignora capas ocultas y capas de ajuste.
+
+IMPRIMIR
+Archivo > Imprimir o Ctrl+P. Papel A4/A3/Carta, orientación, márgenes, tamaño
+real según ppp o encaje a una página y centrado. Se imprime solo la composición.
+La ventana nativa permite elegir impresora o guardar PDF. Sus ajustes finales
+pueden modificar los valores solicitados por la página.
+
+EXPORTACIÓN DE IMAGEN
+PNG, JPEG, WebP, AVIF, TIFF, BMP, TGA, ICO y SVG.
+AVIF incluye jSquash 2.1.1/libavif en WebAssembly, alojado en vendor/avif:
+no depende de un CDN. Se ejecuta en un Web Worker y admite calidad,
+transparencia y modo sin pérdidas. Límite de 16 megapíxeles para AVIF.
+TIFF es RGBA 8 bits sin compresión con resolución ppp. BMP es RGB con fondo
+blanco. TGA es RGBA sin compresión. ICO contiene PNG y admite hasta 256 px.
+SVG contiene la imagen rasterizada, no convierte el documento en vectores.
+PNG/JPEG/WebP usan el codificador del navegador y se comprueba el MIME real.
+Los formatos de salida no sustituyen al proyecto editable .viva.
+
+PSD: ABRIR Y GUARDAR
+Archivo > Abrir admite .psd en pestañas independientes. También se pueden
+arrastrar al área de trabajo. Archivo > Guardar como PSD o Ctrl+Alt+S permite
+exportar capas y grupos. Se incluye ag-psd 31.0.3 en vendor/ag-psd, con sus
+licencias y las de sus dependencias. El modo Editable exporta texto horizontal,
+fuentes, color, transformaciones y figuras con trazados compatibles, además
+de máscaras ráster y parte de los estilos estándar. El modo Apariencia
+rasteriza las capas en la salida, sin modificar las capas de VIVA.
+La importación recupera texto, trazados, grupos, transparencia, máscaras y
+una parte de los efectos estándar cuando están disponibles en el PSD.
+Se admiten documentos RGB y de escala de grises dentro de los límites de VIVA.
+PSD CMYK, PSB y modos de color especiales no están incluidos.
+No es compatibilidad total con Photoshop: algunos ajustes, estilos, objetos
+inteligentes, textos verticales y estructuras avanzadas pueden variar o
+quedar como píxeles. Photoshop puede pedir actualizar texto y necesita las
+fuentes instaladas. La composición de párrafo puede diferir. Guarda siempre
+un .viva como archivo maestro. En PSD con capas de ajuste o efectos no
+soportados conviene comprobar el resultado visual y conservar el original.
+
+HOSTING Y LICENCIAS
+Sube también la carpeta vendor y avif-export-worker.js. Sirve el editor por
+HTTP/HTTPS; no lo ejecutes como file://. El hosting debe servir .wasm como
+application/wasm (el codificador también dispone de carga binaria alternativa).
+No requiere servidor de conversión ni subida de fotos a terceros. Las fuentes
+Google siguen requiriendo conexión a Google Fonts si no están en caché.
+
+VALIDACIÓN
+AVIF real codificado con el WASM incluido y leído por un decodificador
+independiente; dimensiones y transparencia correctas. TIFF leído por otro
+motor para verificar píxeles, alfa y 300 ppp. Comprobaciones de BMP/TGA/ICO.
+PSD con capas, texto, vectores, grupos y 300 ppp guardado y releído; pruebas
+de mapeo VIVA/PSD. Pruebas de texto fuera de lienzo, cancelación, tipografía,
+selección por alfa, editabilidad e iconos con DOM/canvas simulado.
+Pendiente revisión visual en navegador real, impresión física y apertura
+manual del PSD en Adobe Photoshop. No se ha afirmado validación visual.
+
+VERSIONES ANTERIORES
+===================
+ACTUALIZACIÓN 1.9.1
+Al activar Texto, el color predeterminado coincide con el color frontal.
+El texto nuevo toma el color frontal vigente al comenzar a escribir.
+El selector de color del texto sincroniza también el color frontal.
+Activar la herramienta no recolorea el contenido de capas de texto existentes.
+
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 1.9
+
+ESCALADO QUE CONSERVA LA DEFINICIÓN
+Texto y figuras siguen siendo editables al escalar. Se redibujan desde sus
+fuentes y trazados a la resolución de destino, con transformaciones separadas
+para ancho y alto. La vista previa también utiliza ese redibujado hasta
+16 megapíxeles; en dimensiones mayores usa temporalmente la vista bitmap,
+pero al aplicar genera el resultado a resolución completa (máximo 40 MP).
+Las máscaras vectoriales mantienen su geometría, en vez de rasterizarse.
+Los rellenos sólidos y degradados también se regeneran.
+
+Las fotografías conservan una referencia de sus píxeles originales. Reducir
+y ampliar de nuevo no encadena remuestreos de la versión reducida. La
+referencia se guarda en el proyecto .viva, por lo que aumenta su tamaño.
+Si se pintan o filtran los píxeles, se detecta el cambio y se establece una
+nueva referencia; no se recuperan silenciosamente píxeles anteriores a esa
+edición. La máscara ráster y los motivos siguen teniendo resolución finita.
+Esta conservación se aplica también al escalado numérico positivo y a
+Repetir una escala. Girar, sesgar y las deformaciones mantienen el
+comportamiento de rasterización documentado en versiones anteriores.
+
+LÍMITES DE RESOLUCIÓN
+Una fotografía no adquiere detalle real por encima del que tiene su original.
+No se aplica IA de superresolución ni se garantiza nitidez infinita en fotos.
+El zoom superior al 100 % muestra los píxeles del documento. Para texto y
+figuras, amplía la capa con Escalar para generar los píxeles necesarios.
+Si una versión anterior ya rasterizó texto o redujo una imagen sin conservar
+su original, deshaz ese cambio o vuelve a abrir el original para recuperarlo.
+
+VALIDACIÓN
+Pruebas de conservación de texto editable, serialización y copia de sus
+transformaciones, edición posterior, escalado de puntos vectoriales y
+reutilización del original al reducir/ampliar. Las pruebas de manejadores y
+cancelación también siguen pasando. Revisión visual en navegador pendiente.
+
+VERSIONES ANTERIORES
+===================
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 1.8
+
+ESCALADO DIRECTO SOBRE EL LIENZO
+Edición > Transformar > Escalar muestra ocho manejadores en la capa, sin
+abrir ventana emergente. Las esquinas y los lados cambian el tamaño con
+vista previa durante el arrastre. Arrastrar dentro del marco mueve la capa.
+Los manejadores también pueden usarse si la capa sobrepasa el documento.
+La barra superior muestra porcentajes y dimensiones en píxeles, con bloqueo
+de proporción. Shift invierte temporalmente ese bloqueo durante el arrastre.
+Enter o Aplicar confirma; Esc, Cancelar o Ctrl+Z durante la transformación
+la descartan. Flechas desplazan 1 px; Mayús+flechas desplazan 10 px.
+Cambiar de herramienta/documento o guardar aplica la transformación pendiente.
+
+La vista previa conserva los píxeles originales y no crea entradas de
+historial. Al confirmar se remuestrea una sola vez, con una entrada Deshacer.
+Texto, figuras y objetos inteligentes se rasterizan al aplicar, como avisa
+la barra superior. Las máscaras ráster se escalan y las vectoriales se
+integran en el resultado. La escala se limita a 40 megapíxeles.
+Esta actualización cambia únicamente Escalar; Girar y Sesgar conservan sus
+controles numéricos. No permite voltear cruzando los manejadores; los volteos
+siguen disponibles en Transformar.
+
+VALIDACIÓN
+Pruebas de manejadores y geometría, proporciones, esquina opuesta fija,
+vista previa sin mutación, cancelación sin historial y aplicación con
+original recuperable mediante Deshacer. Revisión en navegador real pendiente.
+
+VERSIONES ANTERIORES
+===================
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 1.7
+
+INTERFAZ Y FUENTES
+Menús y controles a 13–14 px, nombres de capa a 13 px y atajos a 12 px.
+El selector tipográfico es ahora un desplegable real. Aparece al activar
+Texto (T) y al seleccionar una capa de texto, aunque esté activa Mover.
+El botón superior «Texto y fuentes» facilita el acceso. Capa > Text >
+Fuentes y tipografía abre un selector con muestra y estado de descarga.
+Se mantienen las 24 familias Google y las fuentes locales disponibles.
+La disponibilidad de fuentes Google depende de la conexión a sus servidores.
+
+MENÚ CAPA
+Reorganizado siguiendo la captura: Nuevo, duplicar/duplicar en/eliminar,
+Text, Estilo de capa, rellenos, ajustes, máscaras ráster/vectorial/de recorte,
+objetos inteligentes, rasterización, grupos y organización, combinación de
+figuras, animación, combinar/acoplar y eliminación de halos.
+
+ESTILOS
+Bisel y relieve, trazo, sombra interior, resplandor interior, satinado,
+superposición de color, degradado y motivo, resplandor exterior y sombra
+paralela. Cada efecto tiene controles propios. Se guardan en el proyecto.
+Se pueden copiar, pegar, borrar, escalar y guardar hasta 20 estilos locales.
+Los estilos avanzados se calculan con operaciones Canvas y su apariencia
+puede diferir de Photoshop/Photopea. Los efectos interiores siguen el relleno
+de la capa en este motor. «3D» es una extrusión de silueta 2D, no modelado 3D.
+«Crear Capas» crea una copia compuesta rasterizada y conserva el original
+editable oculto; no separa cada efecto en una capa independiente.
+
+MÁSCARAS, RELLENOS Y FIGURAS
+Máscaras ráster: revelar/ocultar todo o selección, editar, invertir,
+activar/desactivar, aplicar y eliminar. Las máscaras vectoriales pueden
+crearse desde la selección o desde el trazado; permiten invertir, activar,
+rasterizar y eliminar. Al crear una máscara desde selección, su contorno
+se calcula con precisión de píxel. No hay edición de sus nodos independiente.
+Las máscaras vectoriales siguen las coordenadas locales de la capa; antes
+de deformar o redimensionar una capa con máscara vectorial conviene
+rasterizar esa máscara para que la transformación sea coherente.
+Rellenos de color, degradado y motivo, en capas propias. Las capas de ajuste
+ofrecen los controles de luz/color, blanco y negro y temperatura existentes.
+Combine Shapes: unión, resta, intersección y exclusión por rasterización y
+reconstrucción de contorno al tamaño del documento; puede simplificar bordes.
+Eliminar halos: sustitución de color de borde desde vecinos opacos o
+eliminación matemática de mate blanco/negro. No reemplaza un recorte preciso.
+
+ANIMACIÓN
+Previsualización de las capas como fotogramas independientes, con duración
+configurable, pausa y navegación. Exporta SVG animado con PNG incrustados;
+no exporta GIF ni vídeo. No modifica la visibilidad real de los documentos
+para reproducir la vista previa.
+
+VALIDACIÓN
+Pruebas automatizadas de carga y de integración, estructura del menú,
+máscaras y copias independientes, descontaminación de halos, rellenos,
+controles de bisel y escala, desplegable de fuentes y acceso tipográfico.
+La revisión visual completa en navegador real sigue pendiente.
+
+VERSIONES ANTERIORES
+===================
+ACTUALIZACIÓN 1.6.1
+Iconos de varita mágica y cuentagotas rediseñados con trazos más claros.
+El grupo G muestra Bote de pintura por defecto; Degradado sigue disponible
+mediante clic derecho o Mayús+G.
+
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 1.6
+
+MENÚ EDICIÓN
+Se han incorporado las opciones de la captura: Deshacer / Rehacer,
+Paso adelante, Paso atrás, Transición, Cortar, Copiar, Copiar combinado,
+Pegar, Limpiar, Rellenar, Trazo, Escalar según el contenido, Deformación
+de posición libre, Perspective Warp, Transformación libre, Transformar,
+Alinear automáticamente, Fusionar automáticamente, Assign Profile,
+Convert to Profile y Definir nuevo.
+
+FUNCIONES AVANZADAS Y ALCANCE
+- Escala según contenido: seam carving de baja energía, con eliminación o
+  inserción de costuras en ambos ejes. Trabaja sobre la capa, no el documento.
+  Tiene un límite de cálculo de 400 millones de evaluaciones aproximadas;
+  haz los cambios grandes en pasos pequeños. No detecta personas ni objetos
+  semánticamente y puede deformar detalles en ampliaciones grandes.
+- Deformación libre: puntos de control, con interpolación de desplazamientos
+  por distancia inversa. Las cuatro esquinas iniciales fijan los bordes.
+  Añade puntos haciendo clic y muévelos arrastrando. Botón derecho elimina
+  puntos añadidos. No es un motor de malla articulada con huesos.
+- Perspective Warp / Perspectiva: homografía de un plano de cuatro esquinas.
+  La distorsión de cuatro esquinas usa interpolación bilineal. No hay
+  múltiples planos unidos. Lo que sale del tamaño de capa se recorta.
+- Deformar: curvaturas horizontal y vertical con vista previa.
+- Transformación: escala, giro, sesgo, posición, giros rápidos, volteos y
+  repetición. Los cambios geométricos rasterizan texto, figuras y objetos
+  inteligentes; Deshacer recupera la versión anterior editable.
+- Alineación automática: busca coincidencias por traslación en una vista
+  reducida de hasta 256 px. No corrige giro ni perspectiva, ni garantiza
+  precisión subpíxel. Puede requerir un ajuste manual final.
+- Fusión automática: mezcla por pesos de distancia en los solapamientos;
+  conserva originales ocultos. Requiere imágenes previamente alineadas.
+  No incluye apilado de enfoque, HDR ni compensación de exposición.
+- Perfiles: asigna o convierte sRGB / Display P3 cuando Canvas lo admite.
+  Asignar reinterpreta los valores; convertir conserva la apariencia dentro
+  de gama. Rasteriza el contenido editable. La composición y exportación
+  final siguen siendo sRGB. No hay importación ICC, CMYK ni soft proof.
+- Definir nuevo: pinceles por luminosidad, motivos repetibles y figuras por
+  contorno alfa; selección máxima 1024 x 1024. Se guardan hasta 20 de cada
+  tipo en este navegador. Gestionar preajustes permite usarlos o eliminarlos.
+- Rellenar: color frontal/fondo/personalizado o motivo, opacidad y fusión.
+  Conservar transparencia prioriza source-atop sobre el modo de fusión.
+- Trazo: contorno de selección o lienzo, anchura, color, opacidad y posición.
+- Transición: mezcla los píxeles anteriores y actuales de una capa compatible;
+  no reconstruye cambios de estructura del documento ni capas eliminadas.
+
+ASPECTO DEL LIENZO
+El área exterior del documento pasa a gris #414141 con borde visible.
+Una imagen negra conserva sus píxeles y se distingue del espacio de trabajo.
+Los colores frontal/fondo de las herramientas se mantienen independientes.
+
+ATAJOS AÑADIDOS
+Mayús+Ctrl+C: copiar combinado. Mayús+F5: rellenar.
+Mayús+Ctrl+F: transición. Ctrl+T o Alt+Ctrl+T: transformación libre.
+Mayús+Alt+Ctrl+T: repetir transformación.
+
+VERIFICACIÓN
+Pruebas numéricas de homografías, transformaciones identidad, costuras en
+ambos ejes, transparencia, alineación y conservación del original.
+Pruebas de integración con DOM/canvas simulado, cuadros de diálogo,
+transformación/repetición y funciones previas. Revisión visual en navegador
+real y verificación cromática en pantallas de gama amplia pendientes.
+
+VERSIONES ANTERIORES
+===================
+ACTUALIZACIÓN 1.5.1
+Corregida la superposición del menú nativo del navegador con los menús del editor.
+Se conserva el menú nativo al editar campos de texto. El botón derecho ya no
+inicia gestos de dibujo o movimiento en el lienzo.
+
+VIVA PHOTO EDITOR — ACTUALIZACIÓN 1.5
+
+INSTALACIÓN
+Descomprime este ZIP y sube todos los archivos a la misma carpeta de tu hosting.
+Abre index.html mediante HTTPS. No requiere PHP, base de datos ni compilación.
+Se recomienda un navegador de escritorio actualizado. Las imágenes y proyectos
+se procesan localmente; guarda el proyecto .viva para conservar las capas.
+
+NOVEDADES
+- Menú contextual de capas con fusión, selección de píxeles, duplicar en otro
+  documento, eliminación, objetos inteligentes, rasterización, máscaras de
+  recorte, estilos, combinación y etiquetas de color.
+- Objetos inteligentes con contenido incrustado editable en otra pestaña:
+  Ctrl+S en esa pestaña actualiza el objeto del documento de origen.
+- Figuras en capas propias y proporción con Shift; líneas a intervalos de 45°.
+- Texto directo sobre el lienzo, sin ventana emergente. Barra superior con
+  familia, estilo, tamaño px/pt, color, alineación, espaciado, interlineado,
+  párrafos, orientación y deformación. Ctrl+Enter aplica; Esc cancela.
+- 24 familias populares de Google Fonts, cargadas bajo demanda. Necesitan
+  conexión a fonts.googleapis.com y fonts.gstatic.com; si falla se utiliza
+  una fuente del sistema. Las fuentes no se incluyen dentro del ZIP.
+- Copia entre pestañas: con Mover (V), arrastra la capa desde el lienzo sobre
+  otra pestaña, espera a que se active y suelta sobre el lienzo de destino.
+  El documento de origen conserva su imagen y sus posiciones.
+- Licuar con pinceles de empujar, inflar, contraer, molinete y restaurar;
+  tamaño, presión, comparación y deshacer/rehacer trazos.
+- Filtros por categorías, ajustes, vista previa, comparar con original,
+  restablecer, aplicar a selección y deshacer. Alt+Ctrl+F repite el último.
+  Shift+Ctrl+A abre los ajustes RGB de Camera Raw.
+
+ALCANCE DE LOS FILTROS
+Incluye 49 algoritmos/variantes locales: desenfoques, ruido, pixelizado,
+distorsión, enfoque, relieve, mapa de normales, estilizado, renderizado,
+paso alto/bajo de frecuencia mediante FFT y ajustes de exposición/color.
+Las familias y nombres se organizan siguiendo la referencia aportada.
+No incluye el motor completo de Photopea ni reproduce todos sus subfiltros.
+Camera Raw trabaja con imágenes RGB ya decodificadas, no revela archivos RAW.
+Licuar remuestrea un campo de deformación de hasta 640 x 440; puede perder
+detalles en deformaciones muy pequeñas de documentos grandes.
+Vanishing Point permite convergencia vertical,
+no edición sobre planos múltiples. El grupo 3D incluye relieve y mapa de
+normales, no modelado 3D. Cristalizar usa celdas de muestreo aleatorio.
+Fourier filtra frecuencias en una rejilla de hasta 512 x 512 y remuestrea;
+no es un editor de espectro con reconstrucción manual. Las vistas previas se
+reducen para responder con rapidez y pueden diferir ligeramente del resultado
+a resolución completa. El filtro actúa sobre los píxeles antes de los ajustes
+y estilos de la capa. Rasteriza texto, figuras u objetos inteligentes antes
+de aplicar un filtro a sus píxeles. No se incluyen filtros inteligentes.
+
+VERIFICACIÓN DE ESTA VERSIÓN
+Pruebas automatizadas de carga e integración con DOM/canvas simulado:
+texto, figuras, objetos inteligentes, duplicación y copia entre pestañas;
+pruebas numéricas de los 49 filtros y conservación de datos de entrada.
+No se ha realizado una revisión visual o de interacción en navegador real.
+Antes de usar en producción, prueba documentos representativos y exportaciones.
+
+DOCUMENTACIÓN ANTERIOR (1.4)
+========================================
+VIVA PHOTO EDITOR — Versión 1.4
+
+INSTALACIÓN EN HOSTING
+Descomprime el ZIP y sube TODOS los archivos a una misma carpeta del hosting, por ejemplo public_html/photo-editor/. Abre https://tudominio.com/photo-editor/.
+No requiere PHP, base de datos, Node.js, paquetes externos ni claves API. Recomendado HTTPS y un navegador actualizado. Sustituye todos los archivos de la versión anterior; no solo index.html. Si aparecen elementos antiguos, recarga con Ctrl+F5.
+
+PANTALLA DE INICIO
+Aparece al iniciar y desde Archivo > Nuevo (Ctrl+N). Incluye categorías Social, Impresión, Foto, Pantalla, Móvil, Anuncios y VIVA. Selecciona un tamaño o introduce medidas en píxeles, mm, cm o pulgadas, resolución de 1 a 2400 ppp, nombre y fondo blanco, negro, transparente o personalizado. El botón de flechas intercambia ancho y alto.
+La resolución se utiliza para convertir medidas físicas y se conserva en los proyectos .viva y en los metadatos de PNG y JPEG. WebP conserva el tamaño en píxeles. El modo disponible es RGB de 8 bits, perfil sRGB. No se simulan modos CMYK ni 16/32 bits.
+También puedes abrir una imagen o proyecto desde esta pantalla.
+
+BARRA VERTICAL
+Orden de los 19 grupos principales de la referencia: Mover, Marco de selección, Lazo, Varita mágica, Recortar, Cuentagotas, Corrector, Pincel, Clonar, Borrador, Degradado, Desenfocar, Sobreexponer, Texto, Pluma, Selección de trazados, Formas, Mano y Zoom. Debajo: colores, máscara rápida y atajos.
+Clic derecho, flecha derecha con el botón enfocado o pulsación prolongada abre las variantes disponibles del grupo. Mayús + letra recorre sus variantes.
+
+FUNCIONES AÑADIDAS
+Selección elíptica y lazos libre/poligonal. Varita por color contiguo con tolerancia. Bote de pintura y borrador mágico. Lápiz, corrector puntual, corrector con muestra, reducción de ojos rojos. Enfoque, dedo, sobreexponer, subexponer y esponja. Pluma con puntos y tiradores de curva, pluma libre y edición de puntos o trazado completo. Línea, polígono y estrella. Máscara rápida.
+
+USO DE HERRAMIENTAS
+Lazo poligonal: clic para añadir vértices; Enter o doble clic para cerrar.
+Clonado/corrector con muestra: Alt+clic para definir origen; después pinta.
+Pluma: clic añade puntos; arrastra para crear tiradores de curva; clic sobre el primer punto cierra y rellena; Enter termina un trazado abierto. A selecciona/mueve el trazado; Mayús+A permite editar puntos y tiradores de la capa seleccionada.
+Los puntos de los trazados se conservan en .viva. Texto, formas y pintura se rasterizan. No se admite importar SVG como trazado editable.
+Q activa la máscara rápida: pinta negro para excluir y blanco para incluir; Q de nuevo la convierte en selección. El borrador excluye. La máscara rápida actual se convierte en selección binaria al aplicarla.
+
+MENÚS Y COLORES
+Sin paneles a la derecha. Imagen > Ajustes de luz y color. Capa > Administrar capas. Vista > Navegador. Cierra sus ventanas para volver a pintar. Los cambios se aplican al momento y se pueden deshacer.
+Fondo de trabajo negro, color frontal inicial blanco y fondo de pintura negro. El botón Intercambiar o X cambia los colores activos, sin recolorear la imagen existente. D restablece el par clásico de negro frontal y blanco de fondo.
+
+ATAJOS
+V mover; M marco; L lazo; W varita; C recortar; I cuentagotas; J corrector; B pincel; S clonar; E borrar; G degradado; R desenfocar; O sobreexponer; T texto; P pluma; A selección de trazados; U formas; H mano; Z zoom; Q máscara rápida.
+Espacio: mano temporal. [ y ]: diámetro de pincel. 1 a 9: opacidad de 10 a 90%; 0: 100%.
+Ctrl+N nuevo; Ctrl+O abrir; Ctrl+S guardar .viva; Ctrl+Mayús+S guardar como; Ctrl+Alt+Mayús+W exportar.
+Ctrl+Z deshacer; Ctrl+Mayús+Z rehacer. Ctrl+A seleccionar todo; Ctrl+D deseleccionar; Ctrl+Mayús+D volver a seleccionar; Ctrl+Mayús+I invertir selección.
+Ctrl+C/X/V copiar/cortar/pegar mediante el portapapeles interno. Ctrl+J capa vía copiar; Ctrl+Mayús+J vía cortar. Ctrl+Mayús+N nueva capa. Ctrl+T transformación numérica. Ctrl+Alt+I tamaño de imagen. Ctrl+I invertir colores. Ctrl+E combinar hacia abajo; Ctrl+Mayús+E combinar visibles. Ctrl+[ y Ctrl+] reordenar capas.
+Alt+Retroceso rellenar frontal; Ctrl+Retroceso rellenar fondo. Flechas mueven capa 1 px y Mayús+flechas 10 px. Ctrl+0 encajar; Ctrl+1 100%; Ctrl+2 200%; Ctrl++ y Ctrl+- zoom. Tab oculta/muestra herramientas. Ctrl+Alt+Mayús+K abre atajos.
+En Mac usa Cmd en lugar de Ctrl y Option en lugar de Alt. Las combinaciones reservadas por el navegador pueden no llegar al editor; las operaciones también están en los menús.
+
+ALCANCE
+Implementación propia inspirada en la disposición de la referencia. No incluye todo el motor ni todas las variantes avanzadas de Photopea. Correctores locales sin IA ni relleno generativo; resultados dependientes de la imagen. Varita y rellenos por color contiguo. Sin lazo magnético, selección automática de objetos, recorte de perspectiva, sectores, formas personalizadas, objetos inteligentes ni pinceles ABR. No admite PSD, RAW ni CMYK. Texto rasterizado. Exporta PNG, JPEG o WebP y guarda proyectos .viva (también abre los .luma iniciales).
+Máximo 40 megapíxeles por imagen y 18 pasos de historial. El rendimiento depende del tamaño, las capas y la memoria del dispositivo. No se guarda automáticamente: guarda tu proyecto antes de cerrar. Las imágenes se procesan en tu dispositivo.
+
+VALIDACIÓN
+Sintaxis y carga de scripts, orden de la barra, activación de herramientas, creación de documentos, conversiones de unidades, selección por color, ajustes locales, duplicación independiente de trazados y resolución PNG/JPEG comprobados mediante pruebas de lógica y metadatos. La revisión visual y gestual completa en navegador queda pendiente.
+
+VERSIÓN 1.4 — PESTAÑAS, CAPAS FLOTANTES Y GUÍAS
+
+DOCUMENTOS EN PESTAÑAS
+Archivo > Abrir y el selector de inicio permiten escoger varias imágenes o proyectos. Cada archivo se abre en su propia pestaña, sin sustituir los anteriores. Archivo > Nuevo también crea otra pestaña. Se conservan por documento las capas, el historial, las selecciones, los trazados, la resolución, el zoom y las guías.
+La cruz de cada pestaña la cierra. Se pide confirmación cuando hay cambios sin guardar. Ctrl+W cierra el documento si el navegador entrega ese atajo; el menú Archivo ofrece la misma acción. Cada archivo .viva guarda el proyecto de la pestaña activa. No se guardan todas las pestañas en un solo .viva.
+Arrastrar varios archivos al lienzo los abre en pestañas separadas. Mayús+arrastrar archivos los añade como capas del documento activo. Archivo > Colocar imagen como capa mantiene la incorporación de capas.
+
+CAPAS CON F7
+F7 muestra u oculta una ventana flotante con pestañas Capas, Canales y Trazados. Se puede mover por la franja superior y redimensionar por la esquina. También se abre desde Capa > Administrar capas y Vista > Capas, canales y trazados. La ventana deja trabajar sobre el lienzo mientras está abierta.
+Capas: modos de fusión; opacidad general; relleno separado de los efectos; bloqueos de transparencia, píxeles, posición y todo; visibilidad; nombres; máscaras; selección múltiple mediante Ctrl+clic o intervalo con Mayús+clic; arrastrar filas para ordenar o colocar en grupos.
+Barra inferior: vincular/desvincular varias capas; efectos; máscara; ajustes o relleno uniforme; grupo; nueva capa; eliminar. Los grupos se pueden plegar y duplicar con sus miembros. Ctrl+G crea un grupo y Ctrl+Mayús+G desagrupa. Los grupos creados desde selección trabajan con capas individuales; no se crean grupos anidados mediante ese diálogo.
+Efectos disponibles: sombra paralela, trazo exterior y resplandor exterior. Los efectos se guardan en el proyecto. Las capas de ajuste afectan de forma reversible a las capas inferiores del mismo grupo; pueden limitarse con una máscara.
+Canales: RGB, rojo, verde, azul y transparencia. Elegir un canal lo muestra en gris y restringe las operaciones de pintura compatibles a ese canal; el RGB se conserva al exportar. No incluye canales alfa adicionales ni tintas planas.
+Trazados: selecciona un trazado y usa el menú ≡ para convertirlo en selección, crear una máscara, editar los puntos, renombrar o eliminar su definición manteniendo sus píxeles.
+
+VISTA, REGLAS Y GUÍAS
+Vista incluye zoom, ajustar al área, píxel por píxel, vista previa de patrón, modos de pantalla de la aplicación, Extras, Mostrar, Reglas, Acoplar, destinos de acoplamiento, bloqueo/borrado/creación de guías, guías de capa, unidades y cuadrícula. Limpiar sectores aparece deshabilitado porque no hay edición de sectores. Los modos de pantalla amplían el área de la aplicación, sin forzar el modo de pantalla completa del navegador.
+Ctrl+R muestra/oculta reglas. Ctrl+H muestra/oculta Extras cuando el navegador entrega esos atajos.
+Arrastra desde la regla horizontal hacia abajo para crear una guía horizontal; desde la regla vertical hacia la derecha para una guía vertical. Arrastra una guía para moverla. Arrástrala fuera del documento o pulsa el botón derecho sobre ella para eliminarla. Doble clic edita su posición. Supr elimina la guía seleccionada; al hacer clic en el lienzo se deja de seleccionar la guía.
+Clic derecho en una regla permite elegir píxeles, mm, cm o pulgadas. Las unidades físicas utilizan la resolución del documento. Vista > Agregar guías admite una posición, número y separación, con px, %, cm, mm o in.
+Acoplar ajusta el movimiento de las capas de imagen a guías, cuadrícula visible, límites del documento u otras capas, según las opciones marcadas. Los grupos se desplazan con sus miembros pero no usan el ajuste de posición a guías.
+Las guías y la cuadrícula no forman parte de la imagen exportada. Las guías se guardan en .viva y se mantienen independientes por pestaña.
+
+COLOR
+El intercambio frontal/fondo utiliza ahora un icono compacto de flechas curvas junto a las muestras, sin botón blanco grande ni texto. Se conserva X.
+
+ACTUALIZACIÓN
+Sube todos los archivos del ZIP a la misma carpeta. Esta versión añade layer-window.js, view-tools.js y document-tabs.js, además de los archivos ya existentes. No elimines los archivos originales requeridos. Los recursos incluyen un identificador de versión para actualizar la caché; si el hosting muestra la versión previa, utiliza Ctrl+F5.
+
+VALIDACIÓN DE ESTA VERSIÓN
+Pruebas de lógica de carga de scripts, orden de la barra, resolución PNG/JPEG, creación de documentos, pestañas independientes, conservación de historial/zoom/guías, apertura de archivos y recuperación ante proyecto inválido, grupos y duplicación, propiedades de capa, bloqueos, efectos, canales y creación/movimiento/borrado/bloqueo de guías. No se ha realizado la revisión visual y gestual completa en navegador.
+
+MANUAL DE USUARIO (2.6)
+Ayuda > Manual de usuario abre la guía completa en una pestaña independiente.
+Ayuda también permite descargar el PDF e imprimir el manual, sin imprimir la foto.
+Los archivos manual.html y manual-viva-photo-editor.pdf deben subirse junto al editor.

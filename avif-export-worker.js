@@ -1,0 +1,2 @@
+import encode from './vendor/avif/encode.js';
+self.onmessage=async event=>{try{let d=event.data;self.postMessage({status:'encoding'});let buffer=await encode({data:new Uint8ClampedArray(d.buffer),width:d.width,height:d.height},{quality:d.quality,qualityAlpha:100,speed:6,subsample:3,lossless:d.lossless,bitDepth:8});self.postMessage({buffer},[buffer])}catch(error){self.postMessage({error:error.message||'No se pudo codificar AVIF'})}};
