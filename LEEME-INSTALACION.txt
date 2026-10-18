@@ -645,3 +645,46 @@ Vista previa del trazo, dureza para puntas redondas, flujo, espaciado, ángulo, 
 Se conservan los controles de tamaño/opacidad y los atajos [ y ]. Guarda hasta 20 configuraciones en este navegador.
 Las puntas creadas mediante Edición > Definir pincel siguen disponibles en Mis pinceles mientras estén activadas; su gestión sigue en Edición > Preajustes personalizados.
 El aerógrafo deposita pintura al mover o pulsar; no tiene acumulación temporizada en reposo. No importa archivos ABR.
+
+SELECCIÓN (2.8)
+Contiguo permanece visible en la barra de selección. Elige Varita mágica (W) en el selector de la barra para activarlo; los marcos y lazos lo muestran deshabilitado.
+Barra en dos filas con controles que se ajustan al ancho de pantalla, sin esconder Contiguo en un desplazamiento horizontal.
+En modo Nueva, arrastrar dentro de una selección mueve solamente el contorno; flechas 1 px y Shift+flechas 10 px. Escape cancela el gesto sin aplicar.
+Contorno animado blanco y negro y dimensiones durante el dibujo. Los documentos grandes simplifican solo la representación visual del contorno, sin cambiar la máscara de selección.
+
+2.8.1: inicio y nuevos documentos con Mover activo. Cursores nativos, restablecimiento tras cancelación de arrastres o pérdida de foco.
+
+TRANSFORMACIONES EN VIVO (2.9)
+Ctrl+T / Edición > Transformación libre y los modos Escalar, Girar y Sesgar abren los manejadores en el lienzo.
+Arrastra dentro para mover, esquinas para escalar, zona exterior o punto superior para rotar. En modo Sesgar, arrastra los laterales; en Libre, Ctrl+Shift+lateral.
+Shift alterna la proporción en esquinas y ajusta el giro a pasos de 15 grados; Alt escala desde el centro.
+Campos numéricos X/Y del centro, ancho/alto, ángulo y sesgo. Clic derecho sobre el marco muestra modos, volteos, restablecer, aplicar y cancelar.
+Enter aplica una vez; Escape cancela sin tocar el original. Texto y formas conservan su edición; máscaras se transforman con la capa.
+Las transformaciones de perspectiva y deformación compleja mantienen sus espacios de trabajo específicos.
+
+MENÚ TEXTO (3.0)
+Menú horizontal dedicado con Carácter, Párrafo, Glifos, estilos de carácter/párrafo (20 por categoría), fuentes y gestión de sustituciones.
+Cinco variantes de suavizado: Ninguno, Enfocado, Nítido, Fuerte y Suave (motor web, no algoritmos Adobe).
+Orientación horizontal/vertical, mayúsculas sin alterar el texto original, negrita, cursiva, versalitas, subrayado, tachado y kerning. Dirección LTR/RTL e idioma.
+Texto puntual/párrafo, deformación editable, trazado de trabajo, convertir en forma y rasterizar.
+Buscar/reemplazar literal en la capa o todo el documento, con distinción de mayúsculas y palabras completas Unicode. Respeta capas bloqueadas.
+Glifos y Lorem Ipsum se insertan en la edición activa o al final. Revisión ortográfica nativa del navegador. Actualización de capas y restablecimiento de formato.
+Los formatos se aplican a toda la capa; no se admite composición con formatos distintos por caracteres dentro de una misma capa. Coincidencia automática de fuentes y OpenType avanzado quedan identificados como no disponibles.
+
+3.0.1: cursores de transformación identificables con doble contorno negro/blanco y alternativa nativa. Giro con flechas curvas; escala según dirección real del manejador; sesgo propio. Indicador del modo activo en la barra.
+
+PARCHE (3.1)
+Grupo J (clic derecho/mantener pulsado sobre Corrector) > Parche. Shift+J recorre variantes.
+Rodea el defecto o utiliza una selección existente; arrastra desde dentro hacia una muestra limpia (Origen). Destino copia la selección a la posición donde sueltas.
+Difusión 1-7, adaptación de color y opacidad. Selección nueva/añadir/restar/intersectar y modificadores Shift/Alt.
+Vista previa rápida sin alterar el original; integración por mezcla de gradientes al soltar, en un Web Worker. Un paso de Deshacer por reparación. Esc cancela.
+Actúa sobre la capa de píxeles activa; respeta bloqueo alfa y canales. No edita máscaras, texto ni figuras sin rasterizar. Muestra/destino dentro de la capa; hasta 1 MP por parche.
+No implementa Parche Según contenido ni IA generativa ni el algoritmo propietario de Photoshop.
+
+PEGADO DE IMÁGENES DEL NAVEGADOR (3.2)
+Copiar imagen en la web de origen > Ctrl+V / Cmd+V sobre el lienzo. Se crea una capa nueva centrada sin remuestrear ni aplicar relleno.
+En la pantalla de inicio se crea un documento transparente del tamaño de la imagen.
+Edición > Pegar imagen del sistema permite solicitar la lectura del portapapeles (requiere permiso/API del navegador y contexto seguro). Ctrl+V utiliza el evento nativo.
+Prioriza PNG y conserva alfa, incluidos los bordes semitransparentes. Si la copia PNG es opaca y el HTML aporta un original PNG accesible y del mismo tamaño, se utiliza su alfa.
+Una copia previamente aplanada por el origen/sistema no permite recuperar transparencia. No se borran colores negros reales. Enlaces de imágenes bloqueados por CORS deben copiarse como imagen o descargarse y abrirse.
+Copia/pega interno sigue disponible; la copia interna intenta escribir PNG transparente al portapapeles del sistema cuando está permitido.
