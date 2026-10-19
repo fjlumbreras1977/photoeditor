@@ -1,0 +1,17 @@
+'use strict';
+let layerDeletionFocus=false;
+layerWindow.tabIndex=0;
+function layerDeletionMembers(ids){let chosen=new Set(ids);return layers.filter(l=>chosen.has(l.id)||parentGroups(l).some(g=>chosen.has(g.id)))}
+function canDeleteLayerMembers(members){return members.length>0&&members.every(l=>!l.locked&&!parentGroups(l).some(g=>g.locked))}
+deleteWindowSelection=function(){ensureLayerIds();let members=layerDeletionMembers(selectedLayerIds);if(!members.length)return false;if(!canDeleteLayerMembers(members)){toast('Desbloquea las capas seleccionadas para eliminarlas');return false}if(liveScale)finishLiveScale(false);finishInlineText(true);let ids=new Set(members.map(l=>l.id));checkpoint();layers=layers.filter(l=>!ids.has(l.id));if(!layers.length)layers=[layer('Capa 1')];ensureLayerIds();active=Math.max(0,Math.min(active,layers.length-1));selectedLayerIds=new Set([current().id]);maskMode=false;sync();render();storeActiveDocument();layerWindow.focus({preventScroll:true});return true};
+$('windowDelete').onclick=deleteWindowSelection;$('deleteLayer').onclick=deleteWindowSelection;$('windowDelete').title='Eliminar capas seleccionadas (Suprimir) · Arrastra capas aquí';$('windowDelete').setAttribute('aria-label','Papelera: eliminar capas seleccionadas');
+document.addEventListener('pointerdown',e=>{layerDeletionFocus=!!e.target.closest?.('#layerWindow')},{capture:true});
+layerWindow.addEventListener('click',e=>{if(!editableTarget(e)){layerDeletionFocus=true;layerWindow.focus({preventScroll:true})}});
+window.addEventListener('keydown',e=>{if(e.key!=='Delete'||layerWindow.hidden||layerWindowTab!=='layers'||editableTarget(e)||document.querySelector('dialog[open]')||loading)return;if(!layerDeletionFocus&&!e.target.closest?.('#layerWindow'))return;e.preventDefault();e.stopImmediatePropagation();deleteWindowSelection()},{capture:true});
+const renderBeforeDeleteDrag=renderLayerWindow;renderLayerWindow=function(){renderBeforeDeleteDrag();if(layerWindow.hidden||layerWindowTab!=='layers')return;for(let row of $('layerWindowList').querySelectorAll('.windowLayerRow')){let previous=row.ondragstart;row.ondragstart=e=>{previous?.(e);if(!vivaLayerDrag)return;let id=row.dataset.layerId;vivaLayerDrag.deleteIds=selectedLayerIds.has(id)?[...selectedLayerIds]:[id]}}};
+const layerTrash=$('windowDelete');
+function clearLayerTrash(){layerTrash.classList.remove('layerTrashTarget');layerTrash.classList.remove('layerTrashInvalid')}
+layerTrash.ondragover=e=>{if(!vivaLayerDrag)return;e.preventDefault();e.stopPropagation();clearLayerDropFeedback();let ids=vivaLayerDrag.deleteIds||[vivaLayerDrag.source.id],allowed=canDeleteLayerMembers(layerDeletionMembers(ids));e.dataTransfer.dropEffect=allowed?'move':'none';clearLayerTrash();layerTrash.classList.add(allowed?'layerTrashTarget':'layerTrashInvalid');layerTrash.title=allowed?'Soltar para eliminar '+ids.length+' capa(s)':'Hay capas bloqueadas'};
+layerTrash.ondragleave=clearLayerTrash;
+layerTrash.ondrop=e=>{if(!vivaLayerDrag)return;e.preventDefault();e.stopPropagation();let ids=vivaLayerDrag.deleteIds||[vivaLayerDrag.source.id],oldIds=new Set(selectedLayerIds);finishVivaLayerDrag();clearLayerTrash();selectedLayerIds=new Set(ids);if(!deleteWindowSelection())selectedLayerIds=oldIds};
+document.addEventListener('dragend',clearLayerTrash);window.addEventListener('blur',()=>{clearLayerTrash();layerDeletionFocus=false});renderLayerWindow();

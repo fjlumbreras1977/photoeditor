@@ -1,6 +1,6 @@
 'use strict';
 // Cursores nativos visibles: sin imágenes de cursor ni valores transparentes.
-function vivaToolCursor(id=tool,e=null){if(id==='patch')return patchGesture?.kind==='patch'?'move':e&&selection&&selectionContainsPoint(point(e))?'move':'crosshair';if(id==='move')return'move';if(id==='hand')return drag?'grabbing':'grab';if(id==='text')return'text';if(id==='zoom')return e?.altKey?'zoom-out':'zoom-in';if(['path','directPath'].includes(id))return'default';if(selectionToolIds.includes(id)&&id!=='wand'){if(selectionToolGesture?.kind==='moveBorder')return'move';if(e&&selection&&!selectionToolGesture&&selectionToolSettings.mode==='replace'&&!e.shiftKey&&!e.altKey&&selectionContainsPoint(point(e)))return'move'}return'crosshair'}
+function vivaToolCursor(id=tool,e=null){if(id==='patch')return patchGesture?.kind==='patch'?'move':e&&selection&&selectionContainsPoint(point(e))?'move':'crosshair';if(id==='move')return'move';if(id==='hand')return drag?'grabbing':'grab';if(id==='text')return'text';if(id==='zoom')return e&&(e.shiftKey||e.altKey)?'zoom-out':'zoom-in';if(['path','directPath'].includes(id))return'default';if(selectionToolIds.includes(id)&&id!=='wand'){if(selectionToolGesture?.kind==='moveBorder')return'move';if(e&&selection&&!selectionToolGesture&&selectionToolSettings.mode==='replace'&&!e.shiftKey&&!e.altKey&&selectionContainsPoint(point(e)))return'move'}return'crosshair'}
 function refreshVivaCursor(e=null){if(liveScale)return;ov.style.cursor=vivaToolCursor(tool,e)}
 const toolBeforeCursorControls=setTool;setTool=function(id){const next=toolList.some(t=>t[0]===id)?id:'move';toolBeforeCursorControls(next);refreshVivaCursor()};
 const moveBeforeCursorControls=ov.onpointermove,upBeforeCursorControls=ov.onpointerup,cancelBeforeCursorControls=ov.onpointercancel;ov.onpointermove=e=>{try{return moveBeforeCursorControls?.(e)}finally{refreshVivaCursor(e)}};ov.onpointerup=e=>{try{return upBeforeCursorControls?.(e)}finally{refreshVivaCursor(e)}};ov.onpointercancel=e=>{try{return cancelBeforeCursorControls?.(e)}finally{clearVivaPointerState();refreshVivaCursor(e)}};
@@ -9,3 +9,6 @@ ov.addEventListener('lostpointercapture',()=>{clearVivaPointerState();refreshViv
 const createBeforeCursorControls=$('startForm').onsubmit;$('startForm').onsubmit=function(e){const wasOpen=starter.open;const result=createBeforeCursorControls.call(this,e);if(wasOpen&&!starter.open)setTool('move');return result};
 // Inicialización final, tras registrar todos los controles y herramientas.
 setTool('move');
+
+// Reflect modifier changes immediately, even while the pointer is stationary.
+for(const eventName of ['keydown','keyup'])window.addEventListener(eventName,e=>{if(tool==='zoom'&&(e.key==='Shift'||e.key==='Alt'))refreshVivaCursor(e)});
